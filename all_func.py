@@ -302,6 +302,40 @@ def powerup_deactivate():
 
             newpr._catched = 0 
     
+#level_up
+def level_up():
+    varrrr = 0
+    for i in range(len(b1)):
+        newbr = b1[i]
+        if(newbr._level > 0):
+            varrrr = 1
+    for i in range(len(b4)):
+        newbr = b1[i]
+        if(newbr._level > 0):
+            varrrr = 1
+    for i in range(len(bombs)):
+        newbr = b1[i]
+        if(newbr._level > 0):
+            varrrr = 1
+    if(varrrr == 0):
+        if(config.level == 1):
+            config.level = 2
+            config.grab = 1
+            game_ball._xvel = -1
+            game_ball._yvel = 1
+            set_level()
+        if(config.level == 2):
+            config.level = 3
+            config.grab = 1
+            game_ball._xvel = -1
+            game_ball._yvel = 1
+            set_level()
+        if(config.level == 3):
+            config.level = 4
+            config.grab = 1
+            set_level()
+            game_ball._xvel = -1
+            game_ball._yvel = 1
 
 #printing grid
 def show_grid():

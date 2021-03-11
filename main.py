@@ -83,6 +83,8 @@ if __name__ == "__main__":
         
         coll_brick()
         
+        level_up()
+
         coll_explosive()    
 
         colour_change()
@@ -91,7 +93,7 @@ if __name__ == "__main__":
         
         clear_grid()
         
-        if(config.lives == 0 or config.level > 3):
+        if(config.lives == 0 or config.level > 3 ):
             break
         
         time.sleep(0.05)
