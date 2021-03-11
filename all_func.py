@@ -85,7 +85,7 @@ def show_ball():
 #powerup run
 def powerup_run():
     for i in range(10):
-        for j in range(30):
+        for j in range(len(b1)):
             if(b1[j]._xpos == powerx[i] and b1[j]._ypos == powery[i]):
                 newbr = b1[j]
                 if(newbr._level == 0):
@@ -95,19 +95,19 @@ def powerup_run():
 
 #filling bricks in grid
 def show_brick():
-    for k in range(30):
+    for k in range(len(b1)):
         newbr = b1[k]
         for i in range(game_brick._thick):
             for j in range(game_brick._len):
                 game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
     
-    for k in range(3):
+    for k in range(len(b4)):
         newbr = b4[k]
         for i in range(game_brick._thick):
             for j in range(game_brick._len):
                 game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
     
-    for k in range(6):
+    for k in range(len(bombs)):
         newbr = bombs[k]
         for i in range(game_brick._thick):
             for j in range(game_brick._len):
@@ -115,7 +115,7 @@ def show_brick():
     
 #colour change of brick in collision
 def colour_change():
-    for i in range(30):
+    for i in range(len(b1)):
             newbr = b1[i]
             if(newbr._level == 3):
                 b1[i] = brick3(newbr._xpos  , newbr._ypos)
@@ -255,7 +255,7 @@ def clear_grid():
         
 #collison of brick with ball
 def coll_brick():
-    for k in range(30):
+    for k in range(len(b1)):
         newbr = b1[k]
         xstart = newbr._xpos
         xend = newbr._xpos + newbr._thick 
@@ -308,7 +308,7 @@ def coll_brick():
                                 newbr._level = 0
                                 newbr._visible = 0
     
-    for k in range(3):
+    for k in range(len(b4)):
         newbr = b4[k]
         xstart = newbr._xpos
         xend = newbr._xpos + newbr._thick 
@@ -359,7 +359,7 @@ def coll_brick():
 
 #collision for explosive bricks
 def coll_explosive():
-    for k in range(6):
+    for k in range(len(bombs)):
         newbr = bombs[k]
         xstart = newbr._xpos
         xend = newbr._xpos + newbr._thick 
@@ -368,7 +368,7 @@ def coll_explosive():
         
         if(newbr._level == 0):
             newbr._visible = 0
-            for i in range(30):
+            for i in range(len(b1)):
                 topleftx = b1[i]._xpos
                 toplefty = b1[i]._ypos
                 bottomleftx = b1[i]._xpos + b1[i]._thick 
@@ -401,7 +401,7 @@ def coll_explosive():
                         b1[i]._visible = 0
                         b1[i]._level = 0
             
-            for i in range(3):
+            for i in range(len(b4)):
                 topleftx = b4[i]._xpos
                 toplefty = b4[i]._ypos
                 bottomleftx = b4[i]._xpos + b1[i]._thick 
