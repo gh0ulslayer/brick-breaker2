@@ -49,6 +49,7 @@ if __name__ == "__main__":
                 config.grab = 0
             elif(val == "l" or val == "L"):
                 config.level+=1
+                config.grab = 1
                 set_level()
 
             termios.tcflush(sys.stdin, termios.TCIOFLUSH)
@@ -90,7 +91,7 @@ if __name__ == "__main__":
         
         clear_grid()
         
-        if(config.lives == 0):
+        if(config.lives == 0 or config.level > 3):
             break
         
         time.sleep(0.05)

@@ -341,7 +341,7 @@ def clear_grid():
             for j in range(1,config.columns-1):
                 game_back._grid[i][j] = ' '
         
-    if(config.lives == 0): 
+    if(config.lives == 0 or config.level > 3): 
         for i in range(1,config.rows-1):
             for j in range(1,config.columns-1):
                 game_back._grid[i][j] = ' '
