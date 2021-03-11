@@ -25,6 +25,18 @@ columns = config.columns
 game_back = board(rows,columns, frames)
 
 b1 = []
+
+
+
+game_paddle = movee(config.rows,config.columns)
+game_brick = brick3(config.rows,config.columns)
+game_ball = ball_att()
+b4 = []
+bombs = []
+
+ball_x = game_ball.get_xpos()
+ball_y = game_ball.get_ypos()
+
 for i in range(10):
     b1.append(brick1(7  , 8 + i*7))
 for i in range(10):
@@ -33,14 +45,55 @@ for i in range(10):
     b1.append(brick3(11  , 10 + i*7))
 
 
-game_paddle = movee(config.rows,config.columns)
-game_brick = brick3(config.rows,config.columns)
-game_ball = ball_att()
-b4 = []
-ball_x = game_ball.get_xpos()
-ball_y = game_ball.get_ypos()
 for i in range(3):
     b4.append(brick4(4  , 30 + i*10))
+
+
+for i in range(6):
+    bombs.append(bomb_brick(5, 30 + i*5))
+
+#set level
+def set_level():
+    if(config.level == 2):
+        b1.clear()
+        b4.clear()
+        bombs.clear()
+
+        for i in range(12):
+            b1.append(brick1(7  , 8 + i*6))
+        for i in range(12):
+            b1.append(brick3(9  , 12 + i*6))
+        for i in range(12):
+            b1.append(brick2(11  , 10 + i*6))
+
+
+        for i in range(3):
+            b4.append(brick4(4  , 30 + i*10))
+
+
+        for i in range(6):
+            bombs.append(bomb_brick(5, 30 + i*5))
+    elif(config.level == 3):
+        b1.clear()
+        b4.clear()
+        bombs.clear()
+        for i in range(10):
+            b1.append(brick1(7  , 8 + i*7))
+        for i in range(10):
+            b1.append(brick2(9  , 12 + i*7))
+        for i in range(10):
+            b1.append(brick3(11  , 10 + i*7))
+
+
+        for i in range(3):
+            b4.append(brick4(4  , 30 + i*10))
+
+
+        for i in range(6):
+            bombs.append(bomb_brick(5, 30 + i*5))
+
+
+
 
 powers = []
 powerx = []
@@ -63,10 +116,6 @@ powers[9] = shrink_paddle(powerx[9],powery[9])
 powerup_timer = []
 for i in range(10):
     powerup_timer.append(0)
-
-bombs = []
-for i in range(6):
-    bombs.append(bomb_brick(5, 30 + i*5))
 
 #functions start from here
 
@@ -212,6 +261,8 @@ def show_grid():
     arr.append(config.score)
     config.time_played = time.time() - config.time_start
     arr.append(config.time_played)
+    arr.append(config.level)
+
     output_str += "Lives_remaining = "
     output_str += str(arr[0])
     output_str += "     "
@@ -220,6 +271,9 @@ def show_grid():
     output_str += "     "
     output_str += "Time_played = "
     output_str += str(arr[2])
+    output_str += "     "
+    output_str += "Level = "
+    output_str += str(arr[3])
     output_str += " "
     output_str += '\n'
 

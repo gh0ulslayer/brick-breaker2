@@ -9,3 +9,4 @@ lives = 3
 time_start = 0
 time_played = 0
 grab = 1
+level = 1

@@ -47,8 +47,10 @@ if __name__ == "__main__":
                     game_paddle._start = 89 - game_paddle._paddlelen  
             elif(val == " "):
                 config.grab = 0
-                
-            
+            elif(val == "l" or val == "L"):
+                config.level+=1
+                set_level()
+
             termios.tcflush(sys.stdin, termios.TCIOFLUSH)
             
         #filling paddle in grid
@@ -63,6 +65,7 @@ if __name__ == "__main__":
         all_func.ycoords.append(all_func.ball_y - game_ball._yvel)
         all_func.ycoords.append(all_func.ball_y)
        
+               
         show_ball()
 
         show_brick()
