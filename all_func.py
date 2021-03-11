@@ -324,13 +324,13 @@ def level_up():
             game_ball._xvel = -1
             game_ball._yvel = 1
             set_level()
-        if(config.level == 2):
+        elif(config.level == 2):
             config.level = 3
             config.grab = 1
             game_ball._xvel = -1
             game_ball._yvel = 1
             set_level()
-        if(config.level == 3):
+        elif(config.level == 3):
             config.level = 4
             config.grab = 1
             set_level()
