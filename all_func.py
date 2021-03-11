@@ -34,15 +34,24 @@ game_ball = ball_att()
 b4 = []
 bombs = []
 
+
+powers = []
+powerx = []
+powery = []
+
 ball_x = game_ball.get_xpos()
 ball_y = game_ball.get_ypos()
 
 for i in range(10):
     b1.append(brick1(7  , 8 + i*7))
 for i in range(10):
-    b1.append(brick2(9  , 12 + i*7))
+    b1.append(brick1(8  , 11 + i*7))
 for i in range(10):
-    b1.append(brick3(11  , 10 + i*7))
+    b1.append(brick1(9  , 15 + i*7))
+for i in range(10):
+    b1.append(brick1(10  , 13 + i*7))
+for i in range(10):
+    b1.append(brick1(11  , 10 + i*7))
 
 
 for i in range(3):
@@ -52,52 +61,8 @@ for i in range(3):
 for i in range(6):
     bombs.append(bomb_brick(5, 30 + i*5))
 
-#set level
-def set_level():
-    if(config.level == 2):
-        b1.clear()
-        b4.clear()
-        bombs.clear()
-
-        for i in range(12):
-            b1.append(brick1(7  , 8 + i*6))
-        for i in range(12):
-            b1.append(brick3(9  , 12 + i*6))
-        for i in range(12):
-            b1.append(brick2(11  , 10 + i*6))
 
 
-        for i in range(3):
-            b4.append(brick4(4  , 30 + i*10))
-
-
-        for i in range(6):
-            bombs.append(bomb_brick(5, 30 + i*5))
-    elif(config.level == 3):
-        b1.clear()
-        b4.clear()
-        bombs.clear()
-        for i in range(10):
-            b1.append(brick1(7  , 8 + i*7))
-        for i in range(10):
-            b1.append(brick2(9  , 12 + i*7))
-        for i in range(10):
-            b1.append(brick3(11  , 10 + i*7))
-
-
-        for i in range(3):
-            b4.append(brick4(4  , 30 + i*10))
-
-
-        for i in range(6):
-            bombs.append(bomb_brick(5, 30 + i*5))
-
-
-
-
-powers = []
-powerx = []
-powery = []
 
 for i in range(10):
     var = randint(0,2)
@@ -116,6 +81,96 @@ powers[9] = shrink_paddle(powerx[9],powery[9])
 powerup_timer = []
 for i in range(10):
     powerup_timer.append(0)
+
+#set level
+def set_level():
+    if(config.level == 2):
+        b1.clear()
+        b4.clear()
+        bombs.clear()
+        powers.clear()
+        powerx.clear()
+        powery.clear()
+    
+
+        for i in range(12):
+            b1.append(brick1(7  , 8 + i*6))
+        for i in range(12):
+            b1.append(brick3(9  , 12 + i*6))
+        for i in range(12):
+            b1.append(brick2(11  , 10 + i*6))
+
+
+        for i in range(3):
+            b4.append(brick4(4  , 30 + i*10))
+
+
+        for i in range(6):
+            bombs.append(bomb_brick(5, 30 + i*5))
+
+                
+
+        for i in range(10):
+            var = randint(0,2)
+            powers.append(expand_paddle(b1[3*i + var]._xpos,b1[3*i + var]._ypos))
+            powerx.append(b1[3*i+var]._xpos)
+            powery.append(b1[3*i+var]._ypos)
+
+
+        powers[3] = shrink_paddle(powerx[3],powery[3])
+        powers[4] = fast_ball(powerx[4],powery[4])
+        powers[5] = thru_ball(powerx[5],powery[5])
+        powers[0] = grab_ball(powerx[0],powery[0])
+        powers[7] = fast_ball(powerx[7],powery[7])
+        powers[9] = shrink_paddle(powerx[9],powery[9])
+
+        for i in range(10):
+            if(powerup_timer[i] > 0):
+                powerup_timer[i]= time.time() - 12
+
+    elif(config.level == 3):
+        b1.clear()
+        b4.clear()
+        bombs.clear()
+        powers.clear()
+        powerx.clear()
+        powery.clear()
+        for i in range(10):
+            b1.append(brick1(7  , 8 + i*7))
+        for i in range(10):
+            b1.append(brick2(9  , 12 + i*7))
+        for i in range(10):
+            b1.append(brick3(11  , 10 + i*7))
+
+
+        for i in range(3):
+            b4.append(brick4(4  , 30 + i*10))
+
+
+        for i in range(6):
+            bombs.append(bomb_brick(5, 30 + i*5))
+
+                
+
+        for i in range(10):
+            var = randint(0,2)
+            powers.append(expand_paddle(b1[3*i + var]._xpos,b1[3*i + var]._ypos))
+            powerx.append(b1[3*i+var]._xpos)
+            powery.append(b1[3*i+var]._ypos)
+
+
+        powers[3] = shrink_paddle(powerx[3],powery[3])
+        powers[4] = fast_ball(powerx[4],powery[4])
+        powers[5] = thru_ball(powerx[5],powery[5])
+        powers[0] = grab_ball(powerx[0],powery[0])
+        powers[7] = fast_ball(powerx[7],powery[7])
+        powers[9] = shrink_paddle(powerx[9],powery[9])
+
+        for i in range(10):
+            if(powerup_timer[i] > 0):
+                powerup_timer[i]= time.time() - 12
+
+
 
 #functions start from here
 
