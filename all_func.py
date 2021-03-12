@@ -256,6 +256,7 @@ def colour_change():
 def coll_paddle():
     if(ball_y > game_paddle._start and ball_y < game_paddle._start + game_paddle._paddlelen and ball_x == 24):
         config.flag = 1
+        brick_run()
         if(config.flag_gb == 1):
             config.grab = 1
         else:
