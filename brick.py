@@ -3,6 +3,7 @@ import colorama
 from colorama import Fore, Back, Style
 import numpy as np
 import random
+import time
 
 colorama.init()
 
@@ -14,6 +15,16 @@ class brick():
         self._ypos = cols
         self._visible = 1
     
+    def x_pos(self):
+        if(self._xpos < 26):
+            self._xpos += 1
+        else:
+            self._xpos = 26
+            config.lives = 0 
+        return self._xpos
+
+        
+
 class brick4(brick):
 
     def __init__(self, rows , cols):

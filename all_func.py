@@ -216,7 +216,30 @@ def show_brick():
         for i in range(game_brick._thick):
             for j in range(game_brick._len):
                 game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
-    
+
+#brick_run
+def brick_run():
+    t = time.time()
+    if(t - config.time_start > 4):
+        for k in range(len(b1)):
+            newbr = b1[k]
+            xposs = newbr.x_pos()
+            for i in range(game_brick._thick):
+                for j in range(game_brick._len):
+                    game_back._grid[xposs][newbr._ypos + j] = newbr.get_brick(i,j)
+        
+        for k in range(len(b4)):
+            newbr = b4[k]
+            for i in range(game_brick._thick):
+                for j in range(game_brick._len):
+                    game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+        
+        for k in range(len(bombs)):
+            newbr = bombs[k]
+            for i in range(game_brick._thick):
+                for j in range(game_brick._len):
+                    game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+
 #colour change of brick in collision
 def colour_change():
     for i in range(len(b1)):

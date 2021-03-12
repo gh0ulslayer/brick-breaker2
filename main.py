@@ -71,6 +71,10 @@ if __name__ == "__main__":
 
         show_brick()
         
+        if(time.time() - time_start > 3):
+            # time.sleep(0.1)
+            brick_run()
+
         powerup_run()
 
         coll_paddle()
