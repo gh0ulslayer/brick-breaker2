@@ -54,8 +54,8 @@ for i in range(10):
     b1.append(brick1(11  , 10 + i*7))
 
 
-for i in range(3):
-    b4.append(brick4(4  , 30 + i*10))
+for i in range(8):
+    b4.append(brick4(4  , 10 + i*10))
 
 
 for i in range(6):
@@ -309,14 +309,11 @@ def level_up():
         newbr = b1[i]
         if(newbr._level > 0):
             varrrr = 1
-    for i in range(len(b4)):
-        newbr = b1[i]
-        if(newbr._level > 0):
-            varrrr = 1
     for i in range(len(bombs)):
-        newbr = b1[i]
+        newbr = bombs[i]
         if(newbr._level > 0):
             varrrr = 1
+
     if(varrrr == 0):
         if(config.level == 1):
             config.level = 2
