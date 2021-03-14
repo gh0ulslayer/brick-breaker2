@@ -48,10 +48,14 @@ for i in range(10):
     b1.append(brick1(8  , 11 + i*7))
 for i in range(10):
     b1.append(brick1(9  , 15 + i*7))
-for i in range(10):
-    b1.append(brick1(10  , 13 + i*7))
-for i in range(10):
-    b1.append(brick1(11  , 10 + i*7))
+
+rainbow_brick = []
+for i in range(3):
+    rainbow_brick.append(rainbow(11  , 12 + i*7))
+# for i in range(10):
+    # b1.append(brick1(10  , 13 + i*7))
+# for i in range(10):
+    # b1.append(brick1(11  , 10 + i*7))
 
 
 for i in range(8):
@@ -217,6 +221,12 @@ def show_brick():
             for j in range(game_brick._len):
                 game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
 
+    for k in range(len(rainbow_brick)):
+        newbr = rainbow_brick[k]
+        for i in range(game_brick._thick):
+            for j in range(game_brick._len):
+                game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+
 #brick_run
 def brick_run():
     t = time.time()
@@ -239,6 +249,12 @@ def brick_run():
             for i in range(game_brick._thick):
                 for j in range(game_brick._len):
                     game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+                
+        for k in range(len(rainbow_brick)):
+            newbr = rainbow_brick[k]
+            for i in range(game_brick._thick):
+                for j in range(game_brick._len):
+                    game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
 
 #colour change of brick in collision
 def colour_change():
@@ -250,6 +266,18 @@ def colour_change():
                 b1[i] = brick2(newbr._xpos  , newbr._ypos)
             if(newbr._level == 1):
                 b1[i] = brick1(newbr._xpos  , newbr._ypos)
+
+    for i in range(len(rainbow_brick)):
+            newbr = rainbow_brick[i]
+            if(newbr._level == 3):
+                rainbow_brick[i] = brick1(newbr._xpos  , newbr._ypos)
+                newbr._level = 1
+            if(newbr._level == 2):
+                rainbow_brick[i] = brick3(newbr._xpos  , newbr._ypos)
+                newbr._level = 3
+            if(newbr._level == 1):
+                rainbow_brick[i] = brick2(newbr._xpos  , newbr._ypos)
+                newbr._level = 2
 
 
 #collsion between ball and paddle
@@ -518,7 +546,53 @@ def coll_brick():
                             else:
                                 newbr._level = 0
                                 newbr._visible = 0
-                    
+    
+    for k in range(len(rainbow_brick)):
+        newbr = rainbow_brick[k]
+        xstart = newbr._xpos
+        xend = newbr._xpos + newbr._thick 
+        ystart = newbr._ypos
+        yend = newbr._ypos + newbr._len 
+        if(newbr._level > 0):
+            if(xcoords[0] > xcoords[1]):
+                if(xcoords[1] == xend):
+                    if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                        config.score += 10
+                        # print(config.score)
+                        if(config.flag_tb == 0):
+                            game_ball._xvel *= -1
+                        else:
+                            newbr._level = 0
+                            newbr._visible = 0
+                if(xcoords[1] == xstart):
+                    if(ycoords[1] == ystart or ycoords[1] == yend):
+                        config.score += 10
+                        # print(config.score)
+                        if(config.flag_tb == 0):
+                            game_ball._yvel *= -1
+                        else:
+                            newbr._level = 0
+                            newbr._visible = 0
+            else:
+                if(xcoords[0] > xcoords[1]):
+                    if(xcoords[1] == xstart):
+                        if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                            config.score += 10
+                            # print(config.score)
+                            if(config.flag_tb == 0):
+                                game_ball._xvel *= -1
+                            else:
+                                newbr._level = 0
+                                newbr._visible = 0
+                    if(xcoords[1] == xend):
+                        if(ycoords[1] == ystart or ycoords[1] == yend):
+                            config.score += 10
+                            # print(config.score)
+                            if(config.flag_tb == 0):
+                                game_ball._yvel *= -1
+                            else:
+                                newbr._level = 0
+                                newbr._visible = 0        
                 
 
 #collision for explosive bricks
