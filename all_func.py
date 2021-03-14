@@ -207,16 +207,23 @@ def powerup_run():
                     balllx.append(game_ball._xvel)
                     ballly.append(game_ball._yvel)
                     newpr = powers[i]
-                    if(powerup_2[i] == 3):
+                    if(powerup_2[i] == 4):
                         x_newpr = newpr.x_pos()
-                        game_back._grid[x_newpr][powers[i].position()[2]] = powers[i].position()[0]
+                        game_back._grid[x_newpr][newpr._ypos] = powers[i].position()[0]
                     else:
                         newpr._xpos -= balllx[0]
                         newpr._ypos += ballly[0]
+                        if(newpr._ypos > 88):
+                            newpr._ypos = 88
+                        if(newpr._ypos < 4):
+                            newpr._ypos = 4
+                        if(newpr._xpos < 2):
+                            newpr._xpos = 2
                         game_back._grid[newpr._xpos][newpr._ypos] = powers[i].position()[0]
                         powerup_2[i]+=1
                     balllx.clear()
                     ballly.clear()
+                    
 #filling bricks in grid
 def show_brick():
     for k in range(len(b1)):

@@ -136,3 +136,25 @@ class grab_ball(powerup):
 
         return self._xpos
 
+class shooting_paddle(powerup):
+
+    def __init__(self, rows , cols):
+        super().__init__(rows, cols)
+        
+    def position(self):
+        arr = []
+        arr.append(Fore.WHITE + 'B')
+        arr.append(self._xpos)
+        arr.append(self._ypos)
+        return arr    
+    
+    def x_pos(self):
+        if(self._xpos < 26):
+            self._xpos += 1
+        else:
+            if(self._catched == 0):
+                self._xpos = 29 
+            else:
+                self._xpos = 26 
+
+        return self._xpos
