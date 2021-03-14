@@ -28,11 +28,14 @@ b1 = []
 
 
 
+
 game_paddle = movee(config.rows,config.columns)
 game_brick = brick3(config.rows,config.columns)
 game_ball = ball_att()
 b4 = []
 bombs = []
+
+powerup_2 = []
 
 
 powers = []
@@ -42,6 +45,8 @@ powery = []
 ball_x = game_ball.get_xpos()
 ball_y = game_ball.get_ypos()
 
+balllx = []
+ballly = []
 for i in range(10):
     b1.append(brick1(7  , 8 + i*7))
 for i in range(10):
@@ -51,7 +56,7 @@ for i in range(10):
 
 rainbow_brick = []
 for i in range(3):
-    rainbow_brick.append(rainbow(11  , 12 + i*7))
+    rainbow_brick.append(rainbow(11  , 40 + i*7))
 # for i in range(10):
     # b1.append(brick1(10  , 13 + i*7))
 # for i in range(10):
@@ -85,6 +90,7 @@ powers[9] = shrink_paddle(powerx[9],powery[9])
 powerup_timer = []
 for i in range(10):
     powerup_timer.append(0)
+    powerup_2.append(0)
 
 #set level
 def set_level():
@@ -95,7 +101,7 @@ def set_level():
         powers.clear()
         powerx.clear()
         powery.clear()
-    
+        powerup_2.clear()
 
         for i in range(12):
             b1.append(brick1(7  , 8 + i*6))
@@ -129,6 +135,7 @@ def set_level():
         powers[9] = shrink_paddle(powerx[9],powery[9])
 
         for i in range(10):
+            powerup_2.append(0)
             if(powerup_timer[i] > 0):
                 powerup_timer[i]= time.time() - 12
 
@@ -197,10 +204,19 @@ def powerup_run():
             if(b1[j]._xpos == powerx[i] and b1[j]._ypos == powery[i]):
                 newbr = b1[j]
                 if(newbr._level == 0):
+                    balllx.append(game_ball._xvel)
+                    ballly.append(game_ball._yvel)
                     newpr = powers[i]
-                    x_newpr = newpr.x_pos()
-                    game_back._grid[x_newpr][powers[i].position()[2]] = powers[i].position()[0]
-
+                    if(powerup_2[i] == 3):
+                        x_newpr = newpr.x_pos()
+                        game_back._grid[x_newpr][powers[i].position()[2]] = powers[i].position()[0]
+                    else:
+                        newpr._xpos -= balllx[0]
+                        newpr._ypos += ballly[0]
+                        game_back._grid[newpr._xpos][newpr._ypos] = powers[i].position()[0]
+                        powerup_2[i]+=1
+                    balllx.clear()
+                    ballly.clear()
 #filling bricks in grid
 def show_brick():
     for k in range(len(b1)):
@@ -230,7 +246,7 @@ def show_brick():
 #brick_run
 def brick_run():
     t = time.time()
-    if(t - config.time_start > 4):
+    if(t - config.time_start > 80):
         for k in range(len(b1)):
             newbr = b1[k]
             xposs = newbr.x_pos()
