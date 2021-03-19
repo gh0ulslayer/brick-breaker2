@@ -29,7 +29,21 @@ class boss():
     def reduce_health(self):
         self._health -= 1
 
-
-
+class bombdrop():
+    def __init__(self, rows , cols):
+        self._xpos = rows
+        self._ypos = cols
+        self._catched = 0
+        self._design = ([[Fore.CYAN + '@' for col in range(self._paddlelen)]
+                       for row in range(3)])
     
+    def x_pos(self):
+        if(self._xpos < 26):
+            self._xpos += 1
+        else:
+            if(self._catched == 0):
+                self._xpos = 29 
+            else:
+                self._xpos = 26 
 
+        return self._xpos 

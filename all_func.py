@@ -1015,3 +1015,28 @@ def coll_bullet():
                     bll1._left = 0
                     newbr._level -= 1
     
+#collision with boss
+def coll_boss():
+    if(game_boss._health > 0 and config.level > 2):
+        xstart = 5
+        xend =  8
+        ystart = game_paddle._start
+        yend = game_paddle._start + game_paddle._paddlelen 
+        if(xcoords[0] > xcoords[1]):
+                if(xcoords[1] == xend):
+                    if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                        config.score += 10
+                        game_ball._xvel *= -1
+                if(xcoords[1] == xstart):
+                    if(ycoords[1] == ystart or ycoords[1] == yend):
+                        config.score += 10
+                        game_ball._yvel *= -1
+        else:
+            if(xcoords[1] == xstart):
+                if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                    config.score += 10
+                    game_ball._xvel *= -1
+            if(xcoords[1] == xend):
+                if(ycoords[1] == ystart or ycoords[1] == yend):
+                    config.score += 10
+                    game_ball._yvel *= -1
