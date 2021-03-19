@@ -1027,16 +1027,20 @@ def coll_boss():
                     if(yend >= ycoords[1] and  ystart <= ycoords[1]):
                         config.score += 10
                         game_ball._xvel *= -1
+                        game_boss._health -=1
                 if(xcoords[1] == xstart):
                     if(ycoords[1] == ystart or ycoords[1] == yend):
                         config.score += 10
+                        game_boss._health -=1
                         game_ball._yvel *= -1
         else:
             if(xcoords[1] == xstart):
                 if(yend >= ycoords[1] and  ystart <= ycoords[1]):
                     config.score += 10
+                    game_boss._health -=1
                     game_ball._xvel *= -1
             if(xcoords[1] == xend):
                 if(ycoords[1] == ystart or ycoords[1] == yend):
                     config.score += 10
+                    game_boss._health -=1
                     game_ball._yvel *= -1
