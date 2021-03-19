@@ -238,20 +238,176 @@ def boss_brickss():
             for i in range(game_brick._thick):
                 for j in range(game_brick._len):
                     game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
-            
+        for k in range(6):
+            newbr = boss_unbreakable[k]
+            xstart = newbr._xpos
+            xend = newbr._xpos + newbr._thick 
+            ystart = newbr._ypos
+            yend = newbr._ypos + newbr._len 
+            if(newbr._level == 0):
+                newbr._visible = 0
+            # print(xcoords)
+            if(newbr._level > 0):
+                if(xcoords[0] > xcoords[1]):
+                    if(xcoords[1] == xend):
+                            if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                                config.score += 10
+                                # print(config.score)
+                                if(config.flag_tb == 0):
+                                    game_ball._xvel *= -1
+                                    newbr._level -= 1
+                                else:
+                                    newbr._level = 0
+                                    newbr._visible = 0
+                    if(xcoords[1] == xstart):
+                            if(ycoords[1] == ystart or ycoords[1] == yend):
+                                config.score += 10
+                                # print(config.score)
+                                if(config.flag_tb == 0):
+                                    game_ball._yvel *= -1
+                                    newbr._level -= 1
+                                else:
+                                    newbr._level = 0
+                                    newbr._visible = 0
+                else:
+                    if(xcoords[1] == xstart):
+                        if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                            config.score += 10
+                            # print(config.score)
+                            if(config.flag_tb == 0):
+                                game_ball._xvel *= -1
+                                newbr._level -= 1
+                            else:
+                                newbr._level = 0
+                                newbr._visible = 0
+                    if(xcoords[1] == xend):
+                            if(ycoords[1] == ystart or ycoords[1] == yend):
+                                config.score += 10
+                                # print(config.score)
+                                if(config.flag_tb == 0):
+                                    game_ball._yvel *= -1
+                                    newbr._level -= 1
+                                else:
+                                    newbr._level = 0
+                                    newbr._visible = 0      
         if(game_boss._health < 7):
             for k in range(6,16):
                 newbr = boss_unbreakable[k]
                 for i in range(game_brick._thick):
                     for j in range(game_brick._len):
                         game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
-            
+            for k in range(16):
+                newbr = boss_unbreakable[k]
+                xstart = newbr._xpos
+                xend = newbr._xpos + newbr._thick 
+                ystart = newbr._ypos
+                yend = newbr._ypos + newbr._len 
+                if(newbr._level == 0):
+                    newbr._visible = 0
+                # print(xcoords)
+                if(newbr._level > 0):
+                    if(xcoords[0] > xcoords[1]):
+                        if(xcoords[1] == xend):
+                                if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                                    config.score += 10
+                                    # print(config.score)
+                                    if(config.flag_tb == 0):
+                                        game_ball._xvel *= -1
+                                        newbr._level -= 1
+                                    else:
+                                        newbr._level = 0
+                                        newbr._visible = 0
+                        if(xcoords[1] == xstart):
+                                if(ycoords[1] == ystart or ycoords[1] == yend):
+                                    config.score += 10
+                                    # print(config.score)
+                                    if(config.flag_tb == 0):
+                                        game_ball._yvel *= -1
+                                        newbr._level -= 1
+                                    else:
+                                        newbr._level = 0
+                                        newbr._visible = 0
+                    else:
+                        if(xcoords[1] == xstart):
+                            if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                                config.score += 10
+                                # print(config.score)
+                                if(config.flag_tb == 0):
+                                    game_ball._xvel *= -1
+                                    newbr._level -= 1
+                                else:
+                                    newbr._level = 0
+                                    newbr._visible = 0
+                        if(xcoords[1] == xend):
+                                if(ycoords[1] == ystart or ycoords[1] == yend):
+                                    config.score += 10
+                                    # print(config.score)
+                                    if(config.flag_tb == 0):
+                                        game_ball._yvel *= -1
+                                        newbr._level -= 1
+                                    else:
+                                        newbr._level = 0
+                                        newbr._visible = 0
+
         if(game_boss._health < 3):
             for k in range(16,26):
                 newbr = boss_unbreakable[k]
                 for i in range(game_brick._thick):
                     for j in range(game_brick._len):
                         game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+
+            for k in range(len(boss_unbreakable)):
+                newbr = boss_unbreakable[k]
+                xstart = newbr._xpos
+                xend = newbr._xpos + newbr._thick 
+                ystart = newbr._ypos
+                yend = newbr._ypos + newbr._len 
+                if(newbr._level == 0):
+                    newbr._visible = 0
+                # print(xcoords)
+                if(newbr._level > 0):
+                    if(xcoords[0] > xcoords[1]):
+                        if(xcoords[1] == xend):
+                                if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                                    config.score += 10
+                                    # print(config.score)
+                                    if(config.flag_tb == 0):
+                                        game_ball._xvel *= -1
+                                        newbr._level -= 1
+                                    else:
+                                        newbr._level = 0
+                                        newbr._visible = 0
+                        if(xcoords[1] == xstart):
+                                if(ycoords[1] == ystart or ycoords[1] == yend):
+                                    config.score += 10
+                                    # print(config.score)
+                                    if(config.flag_tb == 0):
+                                        game_ball._yvel *= -1
+                                        newbr._level -= 1
+                                    else:
+                                        newbr._level = 0
+                                        newbr._visible = 0
+                    else:
+                        if(xcoords[1] == xstart):
+                            if(yend >= ycoords[1] and  ystart <= ycoords[1]):
+                                config.score += 10
+                                # print(config.score)
+                                if(config.flag_tb == 0):
+                                    game_ball._xvel *= -1
+                                    newbr._level -= 1
+                                else:
+                                    newbr._level = 0
+                                    newbr._visible = 0
+                        if(xcoords[1] == xend):
+                                if(ycoords[1] == ystart or ycoords[1] == yend):
+                                    config.score += 10
+                                    # print(config.score)
+                                    if(config.flag_tb == 0):
+                                        game_ball._yvel *= -1
+                                        newbr._level -= 1
+                                    else:
+                                        newbr._level = 0
+                                        newbr._visible = 0
 
         for i in range(len(boss_unbreakable)):
                 newbr = boss_unbreakable[i]
@@ -262,6 +418,7 @@ def boss_brickss():
                 if(newbr._level == 1):
                     boss_unbreakable[i] = brick1(newbr._xpos  , newbr._ypos)
 
+        
 
 #brick_run
 def brick_run():
