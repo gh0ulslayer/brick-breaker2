@@ -11,6 +11,7 @@ class bullet():
         self._xpos = rows
         self._ypos = cols
         self._catched = 0
+        self._left = 0
 
     def position(self):
         arr = []
@@ -25,5 +26,7 @@ class bullet():
         else:
             if(self._catched == 0):
                 self._xpos = 0  
+                self._catched = 1
+                self._left = 0
 
         return self._xpos 

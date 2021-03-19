@@ -24,7 +24,6 @@ if __name__ == "__main__":
     input = input()
     input.hide_cursor()
     config.time_start = time.time()
-
     while(1):
         all_func.xcoords = []
         all_func.ycoords = []
@@ -97,7 +96,10 @@ if __name__ == "__main__":
                 for j in range(game_paddle._paddlelen):
                         game_back._grid[5+i][game_paddle._start+j] = game_boss.get_boss(i,j)
             
-        
+        if(config.bullet_flag == 1):
+            show_bullet()
+            coll_bullet()
+
         boss_brickss()
 
         coll_paddle()

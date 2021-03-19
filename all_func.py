@@ -65,7 +65,14 @@ for i in range(3):
     # b1.append(brick1(10  , 13 + i*7))
 # for i in range(10):
     # b1.append(brick1(11  , 10 + i*7))
+bullet_timer = 0
 
+bullet_list1 = []
+bullet_list2 = []
+for i in range(50):
+    bullet_list1.append(bullet(24,game_paddle._start))
+for i in range(50):
+    bullet_list2.append(bullet(24,game_paddle._start + game_paddle._paddlelen - 1))
 
 for i in range(8):
     b4.append(brick4(4  , 10 + i*10))
@@ -157,9 +164,9 @@ def set_level():
         powers.clear()
         powerx.clear()
         powery.clear()
-       
+        config.bullet_flag = 1
+        game_paddle.__init__(5,5)
         
-            
 
       
 
@@ -168,14 +175,30 @@ def set_level():
 #functions start from here
 
 #bullets
-if(config.bullet_flag == 1):
-    bullet_list1 = []
-    bullet_list2 = []
-    for i in range(50):
-        bullet_list1.append(bullet(25,game_paddle._start))
+def show_bullet():
+    if(config.bullet_flag == 1):
+        for i in range(50):
+            newbl = bullet_list2[i]
+            if(newbl._left == 0):
+                newbl.__init__(24,game_paddle._start + game_paddle._paddlelen - 1)
+            game_back._grid[newbl._xpos][newbl._ypos] = newbl.position()[0]
+        for i in range(50):
+            newbl = bullet_list1[i]
+            if(newbl._left == 0):
+                newbl.__init__(24,game_paddle._start)
+            game_back._grid[newbl._xpos][newbl._ypos] = newbl.position()[0]
+        config.bullet_var += 1
+        if(config.bullet_var % 2 == 0):
+            
+            newbl = bullet_list1[0]
+            newbl._left = 1
+            newbl.x_pos()
+            game_back._grid[newbl._xpos][newbl._ypos] = newbl.position()[0]
 
-    
-
+            newbl1 = bullet_list2[0]
+            newbl1._left = 1
+            newbl1.x_pos()
+            game_back._grid[newbl1._xpos][newbl1._ypos] = newbl1.position()[0]
 
 
 #filling ball in grid
@@ -929,3 +952,43 @@ def coll_explosive():
                             else:
                                 newbr._level = 0
                                 newbr._visible = 0
+
+#collision with bullet
+def coll_bullet():
+    for k in range(len(b1)):
+        newbr = b1[k]
+        ystart = newbr._ypos
+        yend = newbr._ypos + newbr._len 
+        if(newbr._level == 0):
+            newbr._visible = 0
+        # print(xcoords)
+        if(newbr._level > 0):
+            bll = bullet_list1[0]
+            bll1 = bullet_list2[0]
+            if(bll._xpos == newbr._xpos):
+                if(bll._ypos > ystart and bll._ypos < yend ):
+                    newbr._level -= 1
+                    bll._left = 0
+            if(bll1._xpos == newbr._xpos):
+                if(bll1._ypos > ystart and bll1._ypos < yend ):
+                    bll1._left = 0
+                    newbr._level -= 1
+    
+    for k in range(len(boss_unbreakable)):
+        newbr = boss_unbreakable[k]
+        ystart = newbr._ypos
+        yend = newbr._ypos + newbr._len 
+        if(newbr._level == 0):
+            newbr._visible = 0
+        # print(xcoords)
+        if(newbr._level > 0):
+            bll = bullet_list1[0]
+            bll1 = bullet_list2[0]
+            if(bll._xpos == newbr._xpos):
+                if(bll._ypos > ystart and bll._ypos < yend ):
+                    bll._left = 0
+                    newbr._level -= 1
+            if(bll1._xpos == newbr._xpos):
+                if(bll1._ypos > ystart and bll1._ypos < yend ):
+                    bll1._left = 0
+                    newbr._level -= 1
