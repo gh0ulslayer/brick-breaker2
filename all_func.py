@@ -146,40 +146,16 @@ def set_level():
         powers.clear()
         powerx.clear()
         powery.clear()
-        for i in range(10):
-            b1.append(brick1(7  , 8 + i*7))
-        for i in range(10):
-            b1.append(brick2(9  , 12 + i*7))
-        for i in range(10):
-            b1.append(brick3(11  , 10 + i*7))
+       
 
 
         for i in range(3):
             b4.append(brick4(4  , 30 + i*10))
 
 
-        for i in range(6):
-            bombs.append(bomb_brick(5, 30 + i*5))
-
                 
 
-        for i in range(10):
-            var = randint(0,2)
-            powers.append(expand_paddle(b1[3*i + var]._xpos,b1[3*i + var]._ypos))
-            powerx.append(b1[3*i+var]._xpos)
-            powery.append(b1[3*i+var]._ypos)
-
-
-        powers[3] = shrink_paddle(powerx[3],powery[3])
-        powers[4] = fast_ball(powerx[4],powery[4])
-        powers[5] = thru_ball(powerx[5],powery[5])
-        powers[0] = grab_ball(powerx[0],powery[0])
-        powers[7] = fast_ball(powerx[7],powery[7])
-        powers[9] = shrink_paddle(powerx[9],powery[9])
-
-        for i in range(10):
-            if(powerup_timer[i] > 0):
-                powerup_timer[i]= time.time() - 12
+      
 
 
 

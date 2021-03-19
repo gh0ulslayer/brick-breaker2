@@ -69,26 +69,28 @@ if __name__ == "__main__":
                
         show_ball()
 
-        show_brick()
-        
+        if(config.level < 3):
+            show_brick()
 
-        powerup_run()
+            powerup_run()
+
+            coll_powerup()
+
+            activating_powerup()
+
+            powerup_deactivate()
+        
+            coll_brick()
+
+            coll_explosive()    
+
+            colour_change()
+    
+            level_up()
+
 
         coll_paddle()
 
-        coll_powerup()
-
-        activating_powerup()
-
-        powerup_deactivate()
-        
-        coll_brick()
-        
-        level_up()
-
-        coll_explosive()    
-
-        colour_change()
 
         show_grid()
         
