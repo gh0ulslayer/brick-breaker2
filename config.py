@@ -10,3 +10,4 @@ time_start = 0
 time_played = 0
 grab = 1
 level = 1
+bullet_flag = 0

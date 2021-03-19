@@ -9,6 +9,7 @@ import tty
 import sys
 import os
 from board import *
+from bullet import *
 from paddle import *
 from ball import *
 from boss import *
@@ -165,6 +166,16 @@ def set_level():
 
 
 #functions start from here
+
+#bullets
+if(config.bullet_flag == 1):
+    bullet_list1 = []
+    bullet_list2 = []
+    for i in range(50):
+        bullet_list1.append(bullet(25,game_paddle._start))
+
+    
+
 
 
 #filling ball in grid

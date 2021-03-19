@@ -92,6 +92,7 @@ if __name__ == "__main__":
     
             level_up()
         else:
+            config.bullet_flag = 1
             for i in range(3):
                 for j in range(game_paddle._paddlelen):
                         game_back._grid[5+i][game_paddle._start+j] = game_boss.get_boss(i,j)

@@ -11,9 +11,12 @@ class movee():
     def __init__(self, rows , cols):
         self._start = 39
         self._paddlelen = 20
-        self._design = ([[Fore.RED + '#' for col in range(self._paddlelen)]
-                       for row in range(2)])
-
+        if(config.bullet_flag == 0):
+            self._design = ([[Fore.RED + '#' for col in range(self._paddlelen)]
+                        for row in range(2)])
+        else:
+            self._design = ([[Fore.BLUE + '#' for col in range(self._paddlelen)]
+                        for row in range(2)])
         
         # self._design = [["*","o","*"],["*"," ","*"],["*","*","*"]]
         # for i in range(3):
@@ -21,9 +24,12 @@ class movee():
                 # self._design[i][j] = Fore.RED + '*'
        
     def change_paddle(self):
-        self._design = ([[Fore.RED + '#' for col in range(self._paddlelen)]
-                       for row in range(2)])
-
+        if(config.bullet_flag == 0):
+            self._design = ([[Fore.RED + '#' for col in range(self._paddlelen)]
+                        for row in range(2)])
+        else:
+            self._design = ([[Fore.BLUE + '#' for col in range(self._paddlelen)]
+                        for row in range(2)])
     def get_paddle(self, i , j):
         return self._design[i][j]
     

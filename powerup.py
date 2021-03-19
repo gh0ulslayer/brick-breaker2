@@ -143,7 +143,7 @@ class shooting_paddle(powerup):
         
     def position(self):
         arr = []
-        arr.append(Fore.WHITE + 'B')
+        arr.append(Fore.WHITE + 'Y')
         arr.append(self._xpos)
         arr.append(self._ypos)
         return arr    
