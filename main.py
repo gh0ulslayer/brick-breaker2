@@ -13,6 +13,7 @@ from paddle import *
 from ball import *
 from brick import *
 from powerup import *
+from boss import *
 from all_func import *
 import all_func
 colorama.init()
@@ -50,7 +51,10 @@ if __name__ == "__main__":
             elif(val == "l" or val == "L"):
                 config.level+=1
                 config.grab = 1
+                config.time_start = time.time()
                 set_level()
+            elif(val == "r" or val == "R"):
+                game_boss.reduce_health()
 
             termios.tcflush(sys.stdin, termios.TCIOFLUSH)
             
@@ -87,7 +91,13 @@ if __name__ == "__main__":
             colour_change()
     
             level_up()
-
+        else:
+            for i in range(3):
+                for j in range(game_paddle._paddlelen):
+                        game_back._grid[5+i][game_paddle._start+j] = game_boss.get_boss(i,j)
+            
+        
+        boss_brickss()
 
         coll_paddle()
 

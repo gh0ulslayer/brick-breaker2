@@ -11,9 +11,10 @@ class boss():
     def __init__(self, rows , cols):
         self._start = rows
         self._paddlelen = cols
-        self._design = ([[Fore.RED + '@' for col in range(self._paddlelen)]
-                       for row in range(2)])
+        self._design = ([[Fore.LIGHTGREEN_EX + '@' for col in range(self._paddlelen)]
+                       for row in range(3)])
 
+        self._health = 10
  
 
     def get_boss(self, i , j):
@@ -24,6 +25,9 @@ class boss():
 
     def move_left(self, i ):
         self._start -= i
+
+    def reduce_health(self):
+        self._health -= 1
 
 
 

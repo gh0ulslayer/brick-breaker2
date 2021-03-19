@@ -11,6 +11,7 @@ import os
 from board import *
 from paddle import *
 from ball import *
+from boss import *
 from brick import *
 from powerup import *
 from random import *
@@ -30,12 +31,14 @@ b1 = []
 
 
 game_paddle = movee(config.rows,config.columns)
+game_boss = boss(game_paddle._start,game_paddle._paddlelen)
 game_brick = brick3(config.rows,config.columns)
 game_ball = ball_att()
 b4 = []
 bombs = []
 
 powerup_2 = []
+boss_unbreakable = []
 
 
 powers = []
@@ -95,6 +98,7 @@ for i in range(10):
 #set level
 def set_level():
     if(config.level == 2):
+        
         b1.clear()
         b4.clear()
         bombs.clear()
@@ -147,13 +151,14 @@ def set_level():
         powerx.clear()
         powery.clear()
        
-
-
-        for i in range(3):
-            b4.append(brick4(4  , 30 + i*10))
-
-
-                
+        for i in range(6):
+            boss_unbreakable.append(brick4(8  , 20 + i*8))
+        
+        for i in range(10):
+            boss_unbreakable.append(brick1(10  , 10 + i*8))
+        for i in range(10):
+            boss_unbreakable.append(brick2(11  , 10 + i*8))
+            
 
       
 
@@ -172,7 +177,7 @@ def show_ball():
     else:
         game_back._grid[xcoords[0]][ycoords[0]] = game_ball.get_ball()
 
-        
+
 #powerup run
 def powerup_run():
     for i in range(10):
@@ -225,6 +230,23 @@ def show_brick():
         for i in range(game_brick._thick):
             for j in range(game_brick._len):
                 game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+
+def boss_brickss():
+    if(game_boss._health > 8):
+        for k in range(len(boss_unbreakable)):
+            newbr = boss_unbreakable[k]
+            for i in range(game_brick._thick):
+                for j in range(game_brick._len):
+                    game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+        for i in range(len(boss_unbreakable)):
+                newbr = boss_unbreakable[i]
+                if(newbr._level == 3):
+                    boss_unbreakable[i] = brick3(newbr._xpos  , newbr._ypos)
+                if(newbr._level == 2):
+                    boss_unbreakable[i] = brick2(newbr._xpos  , newbr._ypos)
+                if(newbr._level == 1):
+                    boss_unbreakable[i] = brick1(newbr._xpos  , newbr._ypos)
+
 
 #brick_run
 def brick_run():
