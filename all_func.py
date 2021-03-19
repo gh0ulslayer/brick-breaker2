@@ -92,7 +92,7 @@ for i in range(10):
 
 for i in range(10):
     var = randint(0,2)
-    powers.append(expand_paddle(b1[3*i + var]._xpos,b1[3*i + var]._ypos))
+    powers.append(shooting_paddle(b1[3*i + var]._xpos,b1[3*i + var]._ypos))
     powerx.append(b1[3*i+var]._xpos)
     powery.append(b1[3*i+var]._ypos)
 
@@ -550,7 +550,9 @@ def activating_powerup():
                     config.flag_tb = 1
             elif(newpr.position()[0] == Fore.WHITE + 'G'):
                     config.flag_gb = 1
-            
+            elif(newpr.position()[0] == Fore.WHITE + 'Y'):
+                    config.bullet_flag = 1
+                    game_paddle.__init__(1,1)
             newpr._catched = 0 
 
 
@@ -576,6 +578,9 @@ def powerup_deactivate():
                         config.flag_tb = 0
                 elif(newpr.position()[0] == Fore.WHITE + 'G'):
                         config.flag_gb = 0
+                elif(newpr.position()[0] == Fore.WHITE + 'Y'):
+                    config.bullet_flag = 0
+                    game_paddle.__init__(1,1)
                 powerup_timer[i] = 0
 
 
@@ -973,9 +978,8 @@ def coll_bullet():
                 if(bll1._ypos > ystart and bll1._ypos < yend ):
                     bll1._left = 0
                     newbr._level -= 1
-    
-    for k in range(len(boss_unbreakable)):
-        newbr = boss_unbreakable[k]
+    for k in range(len(b4)):
+        newbr = b4[k]
         ystart = newbr._ypos
         yend = newbr._ypos + newbr._len 
         if(newbr._level == 0):
@@ -986,9 +990,28 @@ def coll_bullet():
             bll1 = bullet_list2[0]
             if(bll._xpos == newbr._xpos):
                 if(bll._ypos > ystart and bll._ypos < yend ):
-                    bll._left = 0
                     newbr._level -= 1
+                    bll._left = 0
             if(bll1._xpos == newbr._xpos):
                 if(bll1._ypos > ystart and bll1._ypos < yend ):
                     bll1._left = 0
                     newbr._level -= 1
+    for k in range(len(rainbow_brick)):
+        newbr = rainbow_brick[k]
+        ystart = newbr._ypos
+        yend = newbr._ypos + newbr._len 
+        if(newbr._level == 0):
+            newbr._visible = 0
+        # print(xcoords)
+        if(newbr._level > 0):
+            bll = bullet_list1[0]
+            bll1 = bullet_list2[0]
+            if(bll._xpos == newbr._xpos):
+                if(bll._ypos > ystart and bll._ypos < yend ):
+                    newbr._level -= 1
+                    bll._left = 0
+            if(bll1._xpos == newbr._xpos):
+                if(bll1._ypos > ystart and bll1._ypos < yend ):
+                    bll1._left = 0
+                    newbr._level -= 1
+    
