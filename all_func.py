@@ -74,7 +74,13 @@ for i in range(6):
     bombs.append(bomb_brick(5, 30 + i*5))
 
 
+for i in range(6):
+            boss_unbreakable.append(brick4(8  , 20 + i*8))
 
+for i in range(10):
+    boss_unbreakable.append(brick1(10  , 10 + i*8))
+for i in range(10):
+    boss_unbreakable.append(brick2(11  , 10 + i*8))
 
 for i in range(10):
     var = randint(0,2)
@@ -151,13 +157,7 @@ def set_level():
         powerx.clear()
         powery.clear()
        
-        for i in range(6):
-            boss_unbreakable.append(brick4(8  , 20 + i*8))
         
-        for i in range(10):
-            boss_unbreakable.append(brick1(10  , 10 + i*8))
-        for i in range(10):
-            boss_unbreakable.append(brick2(11  , 10 + i*8))
             
 
       
@@ -232,12 +232,27 @@ def show_brick():
                 game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
 
 def boss_brickss():
-    if(game_boss._health > 8):
-        for k in range(len(boss_unbreakable)):
+    if(config.level > 2):
+        for k in range(6):
             newbr = boss_unbreakable[k]
             for i in range(game_brick._thick):
                 for j in range(game_brick._len):
                     game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+            
+        if(game_boss._health < 7):
+            for k in range(6,16):
+                newbr = boss_unbreakable[k]
+                for i in range(game_brick._thick):
+                    for j in range(game_brick._len):
+                        game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+            
+        if(game_boss._health < 3):
+            for k in range(16,26):
+                newbr = boss_unbreakable[k]
+                for i in range(game_brick._thick):
+                    for j in range(game_brick._len):
+                        game_back._grid[newbr._xpos][newbr._ypos + j] = newbr.get_brick(i,j)
+
         for i in range(len(boss_unbreakable)):
                 newbr = boss_unbreakable[i]
                 if(newbr._level == 3):
@@ -445,7 +460,7 @@ def clear_grid():
             for j in range(1,config.columns-1):
                 game_back._grid[i][j] = ' '
         
-    if(config.lives == 0 or config.level > 3): 
+    if(config.lives == 0 or config.level > 3 or game_boss._health == 0): 
         for i in range(1,config.rows-1):
             for j in range(1,config.columns-1):
                 game_back._grid[i][j] = ' '

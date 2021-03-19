@@ -106,7 +106,7 @@ if __name__ == "__main__":
         
         clear_grid()
         
-        if(config.lives == 0 or config.level > 3 ):
+        if(config.lives == 0 or config.level > 3 or game_boss._health == 0):
             break
         
         time.sleep(0.05)
