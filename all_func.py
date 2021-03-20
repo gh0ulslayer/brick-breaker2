@@ -564,6 +564,7 @@ def activating_powerup():
                     config.flag_gb = 1
             elif(newpr.position()[0] == Fore.WHITE + 'Y'):
                     config.bullet_flag = 1
+                    config.bullett_time = time.time()
                     game_paddle.__init__(1,1)
             newpr._catched = 0 
 
@@ -592,6 +593,7 @@ def powerup_deactivate():
                         config.flag_gb = 0
                 elif(newpr.position()[0] == Fore.WHITE + 'Y'):
                     config.bullet_flag = 0
+                    config.bullett_time = 0
                     game_paddle.__init__(1,1)
                 powerup_timer[i] = 0
 
@@ -644,6 +646,12 @@ def show_grid():
     config.time_played = time.time() - config.time_start
     arr.append(config.time_played)
     arr.append(config.level)
+    arr.append(game_boss._health)
+    x = time.time() - config.bullett_time
+    if(config.bullett_time == 0):
+        x = 10
+    arr.append(10-x)
+
 
     output_str += "Lives_remaining = "
     output_str += str(arr[0])
@@ -656,6 +664,12 @@ def show_grid():
     output_str += "     "
     output_str += "Level = "
     output_str += str(arr[3])
+    output_str += "     "
+    output_str += "Boss Health = "
+    output_str += str(arr[4])
+    output_str += "     "
+    output_str += "Bullet Time remaining = "
+    output_str += str(arr[5])
     output_str += " "
     output_str += '\n'
 

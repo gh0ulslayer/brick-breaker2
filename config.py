@@ -13,3 +13,4 @@ level = 1
 bullet_flag = 0
 bullet_var = 0
 fire_flag = 0
+bullett_time = 0
