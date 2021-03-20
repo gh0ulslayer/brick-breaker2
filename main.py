@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
         if(config.bomb_flag == 1):
             show_bomb()
-            # coll_bullet()
+            coll_bomb()
         
         boss_brickss()
 

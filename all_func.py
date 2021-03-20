@@ -213,12 +213,12 @@ def show_bomb():
             newbl.__init__(8,game_paddle._start + game_paddle._paddlelen - 10)
         game_back._grid[newbl._xpos][newbl._ypos] = newbl.position()[0]
         config.bomb_var += 1
-        print(config.bomb_var)
         if(config.bomb_var % 2 == 0):
             newbl = boss_bomb
             newbl._left = 1
             newbl.x_pos()
             game_back._grid[newbl._xpos][newbl._ypos] = newbl.position()[0]
+        
 
 #filling ball in grid
 def show_ball():
@@ -553,6 +553,12 @@ def coll_paddle():
             else:
                 game_ball._yvel += 2
 
+#collision between paddle and bomb
+def coll_bomb():
+    if(boss_bomb._ypos > game_paddle._start and boss_bomb._ypos < game_paddle._start + game_paddle._paddlelen and boss_bomb._xpos == 25):
+        config.lives -=1
+        config.grab = 1
+        boss_bomb.__init__(8,game_paddle._start + game_paddle._paddlelen - 10)
 
 #collision between powerup and paddle
 def coll_powerup():

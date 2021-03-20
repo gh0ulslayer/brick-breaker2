@@ -24,9 +24,7 @@ class Bombs():
             if(self._xpos < 26):
                 self._xpos += 1
             else:
-                if(self._catched == 0):
-                    self._xpos = 29 
-                else:
-                    self._xpos = 26 
-
+                self._xpos = 29
+                self._left = 0
+                
             return self._xpos 
