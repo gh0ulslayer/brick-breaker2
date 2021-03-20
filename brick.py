@@ -14,6 +14,7 @@ class brick():
         self._xpos = rows
         self._ypos = cols
         self._visible = 1
+        self._stop = 0
     
     def x_pos(self):
         if(self._xpos < 26):

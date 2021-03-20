@@ -28,6 +28,7 @@ game_back = board(rows,columns, frames)
 
 b1 = []
 
+rainbow_stop  = []
 
 
 
@@ -61,6 +62,7 @@ for i in range(10):
 rainbow_brick = []
 for i in range(3):
     rainbow_brick.append(rainbow(11  , 40 + i*7))
+    rainbow_stop.append(0)
 # for i in range(10):
     # b1.append(brick1(10  , 13 + i*7))
 # for i in range(10):
@@ -457,7 +459,7 @@ def boss_brickss():
 #brick_run
 def brick_run():
     t = time.time()
-    if(t - config.time_start > 80):
+    if(t - config.time_start > 40):
         for k in range(len(b1)):
             newbr = b1[k]
             xposs = newbr.x_pos()
@@ -496,15 +498,23 @@ def colour_change():
 
     for i in range(len(rainbow_brick)):
             newbr = rainbow_brick[i]
-            if(newbr._level == 3):
-                rainbow_brick[i] = brick1(newbr._xpos  , newbr._ypos)
-                newbr._level = 1
-            if(newbr._level == 2):
-                rainbow_brick[i] = brick3(newbr._xpos  , newbr._ypos)
-                newbr._level = 3
-            if(newbr._level == 1):
-                rainbow_brick[i] = brick2(newbr._xpos  , newbr._ypos)
-                newbr._level = 2
+            if(rainbow_stop[i] == 0):
+                if(newbr._level == 3):
+                    rainbow_brick[i] = brick1(newbr._xpos  , newbr._ypos)
+                    newbr._level = 1
+                if(newbr._level == 2):
+                    rainbow_brick[i] = brick3(newbr._xpos  , newbr._ypos)
+                    newbr._level = 3
+                if(newbr._level == 1):
+                    rainbow_brick[i] = brick2(newbr._xpos  , newbr._ypos)
+                    newbr._level = 2
+            else:
+                if(newbr._level == 3):
+                    rainbow_brick[i] = brick3(newbr._xpos  , newbr._ypos)
+                if(newbr._level == 2):
+                    rainbow_brick[i] = brick2(newbr._xpos  , newbr._ypos)
+                if(newbr._level == 1):
+                    rainbow_brick[i] = brick1(newbr._xpos  , newbr._ypos)
 
 
 #collsion between ball and paddle
@@ -785,12 +795,14 @@ def coll_brick():
         xend = newbr._xpos + newbr._thick 
         ystart = newbr._ypos
         yend = newbr._ypos + newbr._len 
-        if(newbr._level > 0):
+        
+        if(newbr._level > 0 ):
             if(xcoords[0] > xcoords[1]):
                 if(xcoords[1] == xend):
                     if(yend >= ycoords[1] and  ystart <= ycoords[1]):
                         config.score += 10
                         # print(config.score)
+                        rainbow_stop[k] = 1
                         if(config.flag_tb == 0):
                             game_ball._xvel *= -1
                         else:
@@ -799,6 +811,7 @@ def coll_brick():
                 if(xcoords[1] == xstart):
                     if(ycoords[1] == ystart or ycoords[1] == yend):
                         config.score += 10
+                        rainbow_stop[k] = 1
                         # print(config.score)
                         if(config.flag_tb == 0):
                             game_ball._yvel *= -1
@@ -810,6 +823,7 @@ def coll_brick():
                     if(xcoords[1] == xstart):
                         if(yend >= ycoords[1] and  ystart <= ycoords[1]):
                             config.score += 10
+                            rainbow_stop[k] = 1
                             # print(config.score)
                             if(config.flag_tb == 0):
                                 game_ball._xvel *= -1
@@ -819,6 +833,7 @@ def coll_brick():
                     if(xcoords[1] == xend):
                         if(ycoords[1] == ystart or ycoords[1] == yend):
                             config.score += 10
+                            rainbow_stop[k] = 1
                             # print(config.score)
                             if(config.flag_tb == 0):
                                 game_ball._yvel *= -1
