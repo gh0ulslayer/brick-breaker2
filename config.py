@@ -14,3 +14,5 @@ bullet_flag = 0
 bullet_var = 0
 fire_flag = 0
 bullett_time = 0
+bomb_flag = 0
+bomb_var = 0

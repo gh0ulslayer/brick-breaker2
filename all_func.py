@@ -10,6 +10,7 @@ import sys
 import os
 from board import *
 from bullet import *
+from bombs import *
 from paddle import *
 from ball import *
 from boss import *
@@ -68,6 +69,8 @@ for i in range(3):
 # for i in range(10):
     # b1.append(brick1(11  , 10 + i*7))
 bullet_timer = 0
+
+boss_bomb = Bombs(10,12)
 
 bullet_list1 = []
 bullet_list2 = []
@@ -166,7 +169,7 @@ def set_level():
         powers.clear()
         powerx.clear()
         powery.clear()
-        config.bullet_flag = 1
+        config.bomb_flag = 1
         game_paddle.__init__(5,5)
         
 
@@ -201,7 +204,21 @@ def show_bullet():
             newbl1._left = 1
             newbl1.x_pos()
             game_back._grid[newbl1._xpos][newbl1._ypos] = newbl1.position()[0]
+#filling bomb in the grid
 
+def show_bomb():
+    if(config.bomb_flag == 1):
+        newbl = boss_bomb
+        if(newbl._left == 0):
+            newbl.__init__(8,game_paddle._start + game_paddle._paddlelen - 10)
+        game_back._grid[newbl._xpos][newbl._ypos] = newbl.position()[0]
+        config.bomb_var += 1
+        print(config.bomb_var)
+        if(config.bomb_var % 2 == 0):
+            newbl = boss_bomb
+            newbl._left = 1
+            newbl.x_pos()
+            game_back._grid[newbl._xpos][newbl._ypos] = newbl.position()[0]
 
 #filling ball in grid
 def show_ball():
@@ -825,6 +842,7 @@ def coll_brick():
                         # print(config.score)
                         rainbow_stop[k] = 1
                         if(config.flag_tb == 0):
+                            newbr._level -=1
                             game_ball._xvel *= -1
                         else:
                             newbr._level = 0
@@ -835,6 +853,7 @@ def coll_brick():
                         rainbow_stop[k] = 1
                         # print(config.score)
                         if(config.flag_tb == 0):
+                            newbr._level -=1
                             game_ball._yvel *= -1
                         else:
                             newbr._level = 0
@@ -847,6 +866,7 @@ def coll_brick():
                             rainbow_stop[k] = 1
                             # print(config.score)
                             if(config.flag_tb == 0):
+                                newbr._level -=1
                                 game_ball._xvel *= -1
                             else:
                                 newbr._level = 0
@@ -857,6 +877,7 @@ def coll_brick():
                             rainbow_stop[k] = 1
                             # print(config.score)
                             if(config.flag_tb == 0):
+                                newbr._level -=1
                                 game_ball._yvel *= -1
                             else:
                                 newbr._level = 0
