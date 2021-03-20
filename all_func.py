@@ -522,6 +522,8 @@ def coll_paddle():
     if(ball_y > game_paddle._start and ball_y < game_paddle._start + game_paddle._paddlelen and ball_x == 24):
         config.flag = 1
         brick_run()
+        os.system('aplay -q main.wav&')
+
         if(config.flag_gb == 1):
             config.grab = 1
         else:
@@ -686,6 +688,8 @@ def clear_grid():
                     output_strr += game_back.get_grid(row,col)
             output_strr += '\n'
         print('\033[H' + output_strr)
+        os.system('aplay -q 1.wav&')
+
         
 #collison of brick with ball
 def coll_brick():
@@ -704,6 +708,9 @@ def coll_brick():
                         if(yend >= ycoords[1] and  ystart <= ycoords[1]):
                             config.score += 10
                             # print(config.score)
+                            if(fire_flag == 1):
+                                newbr._level = 0
+
                             if(config.flag_tb == 0):
                                 game_ball._xvel *= -1
                                 newbr._level -= 1
