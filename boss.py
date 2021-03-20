@@ -11,14 +11,16 @@ class boss():
     def __init__(self, rows , cols):
         self._start = rows
         self._paddlelen = cols
-        self._design = ([[Fore.LIGHTGREEN_EX + '@' for col in range(self._paddlelen)]
-                       for row in range(3)])
+        self._design = [['|','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','|'],
+        ['|','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','=','|'],
+        ['\\','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','/']] 
+        
 
         self._health = 10
  
 
     def get_boss(self, i , j):
-        return self._design[i][j]
+        return (self._design[i][j] + Fore.CYAN)
     
     def move_right(self, i ):
         self._start += i
@@ -34,9 +36,9 @@ class bombdrop():
         self._xpos = rows
         self._ypos = cols
         self._catched = 0
-        self._design = ([[Fore.CYAN + '@' for col in range(self._paddlelen)]
-                       for row in range(3)])
-    
+        self._design = [['|','=','=','=','=','=','=','=','=','|'],['|','=','=','=','=','=','=','=','=','|'],['\\','-','-','-','-','-','-','-','-','/']]
+        
+        
     def x_pos(self):
         if(self._xpos < 26):
             self._xpos += 1
